@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/main.js"></script>
+    <title>Dashboard</title>
 </head>
 <body>
-    
+    <main>
+        <aside class="sidebar">
+            <button class="sidebar-toggle">≡</button>
+            <div class="period-section">
+                <h3>Period</h3>
+                <select class="year-select">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+                <select class="month-select">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
+            <div class="sidebar-divider"></div>
+            <nav class="sidebar-nav">
+                <a href="" id="projects" class="nav-item active">Projects</a>
+                <a href="" id="employees" class="nav-item">Employees</a>
+            </nav>
+        </aside>
+        <div class="content">
+
+        </div>
+    </main>
 </body>
 </html>
