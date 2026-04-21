@@ -19,7 +19,6 @@
     font: 14px arial, sans-serif;
 }
 
-
 main {
     display: flex;
 }
@@ -114,17 +113,15 @@ h1 {
 
 /* main content */
 
-/* projects*/
-
-/* header */
-
 .content-wrapper {
     display: flex;
     width: 100%;
     padding: 2em;
 }
 
-.projects-content {
+/* projects*/
+
+.projects-content, .employees-content {
     display: flex;
     flex: 1;
     background-color: #ffffff;
@@ -195,7 +192,7 @@ td {
 
 }
 
-.project-delete-button {
+.delete-button {
     background-color: var(--color);
 }
 
@@ -218,4 +215,13 @@ td {
 
 .negative-income {
     color: var(--color)
+}
+
+/* Employees */
+
+
+/* toggle*/
+
+.hidden {
+    display: none;
 }
