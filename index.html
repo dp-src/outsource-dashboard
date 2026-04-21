@@ -39,13 +39,38 @@
                 <a href="" id="employees" class="nav-item">Employees</a>
             </nav>
         </aside>
-        <div class="content">
-            <div class="projects">
+        <div class="content-wrapper">
+            <div class="projects-content">
                 <div class="header">
                     <h1>Projects</h1>
                     <button id="add-project">+ Add Project</button>
                     <button id="seed-data">Seed Data</button>
                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Company name<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Project name<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Budget<span class="sorting-icon">⥯</span></th>
+                            <th>Employee Capacity<span class="sorting-icon">⥯</span></th>
+                            <th>Employees</th>
+                            <th>Estimated income<span class="sorting-icon">⥯</span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TechCorp</td>
+                            <td>E-Commerce Platform</td>
+                            <td>$12500.00</td>
+                            <td>3.0/3</td>
+                            <td><button class="show-employees-button">Show employees</button></td>
+                            <td class="negative-income">$-3958.33</td>
+                            <td><button class="project-delete-button">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="total">Total Estimated Income: <span class="total negative-income">$-16240.83</span> <span class="total-note">(Bench payments: $8700.00)</span></div>
             </div>
             <div class="employees hidden"></div>
         </div>

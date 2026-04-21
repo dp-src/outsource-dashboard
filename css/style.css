@@ -12,12 +12,13 @@
     --unactive-color: #a9a9a9;
     --light-text-color: #ffffff;
     --dark-text-color: #000000;
-    --color: #EC7063;
+    --color: #df5b4d;
 }
 
 * {
-    font: 16px arial, sans-serif;
+    font: 14px arial, sans-serif;
 }
+
 
 main {
     display: flex;
@@ -26,6 +27,7 @@ main {
 h1 {
     font-size: 25px;
 }
+
 .hidden {
     display: none;
 }
@@ -116,9 +118,18 @@ h1 {
 
 /* header */
 
-.content {
+.content-wrapper {
+    display: flex;
     width: 100%;
+    padding: 2em;
+}
+
+.projects-content {
+    display: flex;
+    flex: 1;
     background-color: #ffffff;
+    flex-direction: column;
+    gap: 2em;
 }
 
 .header {
@@ -126,22 +137,85 @@ h1 {
     flex-direction: row;
     justify-content: flex-end;
     gap: 20px;
-    padding: 1em 2em;
-    margin-top: 2em;
+    padding: 1em 0;
 }
 
-.header button {
-    background-color: var(--secondary-color);
+button {
+    background-color: var(--primary-color);
     color: var(--light-text-color);
     border-radius: 5px;
     padding: 0.3em 1em;
     border-color: transparent;
 }
 
-.header button:hover {
-    background-color: var(--primary-color);
+button:hover {
+    background-color: var(--secondary-color);
     color: var(--accent-transparent-color);
 }
+
 #add-project {
     margin-left: auto;
+}
+
+table {
+    box-shadow: rgba(0, 0, 0, 0.078) 0px 0px 30px;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+th {
+    padding: 1em 5px;
+}
+
+.sorting-icon {
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.search-icon {
+    cursor: pointer;
+    font-size: 1.4em;
+}
+
+.sorting-icon:hover, .search-icon:hover {
+    color: var(--accent-color);
+}
+
+tr {
+    box-shadow: inset 0 -1px 0 0 #dddddd;
+}
+
+td {
+    text-align: center;
+    padding: 1em 5px;
+
+}
+
+.project-delete-button {
+    background-color: var(--color);
+}
+
+.show-employees-button {
+    background-color: var(--accent-color);
+    color: var(--dark-text-color);
+}
+
+.total {
+    font-weight: 600;
+    font-size: 1.3em;
+}
+
+.total-note {
+    font-size: 1em;
+    font-weight: 400;
+    color: #000000;
+    opacity: 50%;
+}
+
+.negative-income {
+    color: var(--color)
 }
