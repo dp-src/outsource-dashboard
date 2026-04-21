@@ -18,11 +18,15 @@
     font: 16px arial, sans-serif;
 }
 
+main {
+    display: flex;
+}
+
 .sidebar {
     background-color: var(--primary-color);
-    max-width: 20%;
     display: flex;
     flex-direction: column;
+    flex: 0 0 300px;
     gap: 20px;
     height: 100vh;
     text-decoration: none;
@@ -33,9 +37,6 @@
 .sidebar-toggle {
     font-size: 25px;
     height: 50px;
-    right: 20px;
-    top: 20px;
-    border-radius: 10px;
     background-color: var(--secondary-color);
     border-color: transparent;
     color: var(--unactive-color);
@@ -69,6 +70,7 @@
 
 .sidebar-divider {
     height: 1px;
+    margin: 10px 0px;
     background-color: var(--unactive-color);
     opacity: 20%;
 }
