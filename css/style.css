@@ -7,7 +7,8 @@
 :root {
     --primary-color: #4d4f6d;
     --secondary-color: #3f4263;
-    --accent-color: #D4AF37;
+    --accent-color: #ffd344;
+    --accent-transparent-color: #ffe285;
     --unactive-color: #a9a9a9;
     --light-text-color: #ffffff;
     --dark-text-color: #000000;
@@ -20,6 +21,13 @@
 
 main {
     display: flex;
+}
+
+h1 {
+    font-size: 25px;
+}
+.hidden {
+    display: none;
 }
 
 .sidebar {
@@ -103,3 +111,37 @@ main {
 }
 
 /* main content */
+
+/* projects*/
+
+/* header */
+
+.content {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 1em 2em;
+    margin-top: 2em;
+}
+
+.header button {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    border-radius: 5px;
+    padding: 0.3em 1em;
+    border-color: transparent;
+}
+
+.header button:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-transparent-color);
+}
+#add-project {
+    margin-left: auto;
+}
