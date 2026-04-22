@@ -5,14 +5,15 @@
 }
 
 :root {
-    --primary-color: #4d4f6d;
-    --secondary-color: #3f4263;
+    --primary-light: #4d4f6d;
+    --primary-dark: #3f4263;
     --accent-color: #ffd344;
-    --accent-transparent-color: #ffe285;
+    --accent-hover-color: #ffc400;
     --unactive-color: #a9a9a9;
     --light-text-color: #ffffff;
     --dark-text-color: #000000;
-    --color: #df5b4d;
+    --delete-color: #df5b4d;
+    --delete-hover-color: #e14332;
 }
 
 * {
@@ -32,10 +33,10 @@ h1 {
 }
 
 .sidebar {
-    background-color: var(--primary-color);
+    background-color: var(--primary-light);
     display: flex;
     flex-direction: column;
-    flex: 0 0 300px;
+    flex: 0 0 200px;
     gap: 20px;
     height: 100vh;
     text-decoration: none;
@@ -46,7 +47,7 @@ h1 {
 .sidebar-toggle {
     font-size: 25px;
     height: 50px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-dark);
     border-color: transparent;
     color: var(--unactive-color);
     cursor: pointer;
@@ -101,12 +102,12 @@ h1 {
 }
 
 .nav-item:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-dark);
     color: var(--light-text-color);
 }
 
 .nav-item.active {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-dark);
     border-left: 3px solid var(--accent-color);
     color: var(--light-text-color);
 }
@@ -138,16 +139,17 @@ h1 {
 }
 
 button {
-    background-color: var(--primary-color);
+    background-color: var(--primary-light);
     color: var(--light-text-color);
     border-radius: 5px;
     padding: 0.3em 1em;
     border-color: transparent;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
-    color: var(--accent-transparent-color);
+    background-color: var(--primary-dark);
+    color: var(--accent-color);
 }
 
 #add-project {
@@ -160,7 +162,7 @@ table {
 }
 
 thead {
-    background-color: var(--primary-color);
+    background-color: var(--primary-light);
     color: var(--light-text-color);
 }
 
@@ -183,7 +185,7 @@ th {
 }
 
 tr {
-    box-shadow: inset 0 -1px 0 0 #dddddd;
+    border: 1px solid rgb(217, 217, 217);
 }
 
 td {
@@ -193,17 +195,31 @@ td {
 }
 
 .delete-button {
-    background-color: var(--color);
+    background-color: var(--delete-color);
 }
 
-.show-employees-button {
+.delete-button:hover {
+    background-color: var(--delete-hover-color);
+    color: var(--light-text-color);
+}
+
+.show-button, .assign-button {
     background-color: var(--accent-color);
     color: var(--dark-text-color);
 }
 
+.show-button:hover, .assign-button:hover {
+    background-color: var(--accent-hover-color);
+    color: var(--dark-text-color);
+}
+
+.availability-button:hover {
+    color: var(--light-text-color);
+}
+
 .total {
     font-weight: 600;
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 .total-note {
@@ -214,7 +230,7 @@ td {
 }
 
 .negative-income {
-    color: var(--color)
+    color: var(--delete-color)
 }
 
 /* Employees */

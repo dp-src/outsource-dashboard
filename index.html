@@ -40,7 +40,7 @@
             </nav>
         </aside>
         <div class="content-wrapper">
-            <div class="projects-content hidden">
+            <div class="projects-content">
                 <div class="header">
                     <h1>Projects</h1>
                     <button id="add-project">+ Add Project</button>
@@ -64,7 +64,7 @@
                             <td>E-Commerce Platform</td>
                             <td>$12500.00</td>
                             <td>3.0/3</td>
-                            <td><button class="show-employees-button">Show employees</button></td>
+                            <td><button class="show-button">Show employees</button></td>
                             <td class="negative-income">$-3958.33</td>
                             <td><button class="delete-button">Delete</button></td>
                         </tr>
@@ -72,7 +72,7 @@
                 </table>
                 <div class="total">Total Estimated Income: <span class="total negative-income">$-16240.83</span> <span class="total-note">(Bench payments: $8700.00)</span></div>
             </div>
-            <div class="employees-content">
+            <div class="employees-content hidden">
                 <div class="header">
                     <h1>Employees</h1>
                     <button id="add-project">+ Add Employee</button>
@@ -99,10 +99,10 @@
                             <td>Junior</td>
                             <td>$3750</td>
                             <td>$3750</td>
-                            <td><button class="show-employees-button">Show assignments (<span id='assignment-count'>1</span>) <span></span></button></td>
+                            <td><button class="show-button">Show assignments (<span id='assignment-count'>1</span>) <span></span></button></td>
                             <td class="negative-income">$-5.33</td>
-                            <td><button class="employee-availability-button">Availability</button>
-                            <button class="employee-assign-button">Assing</button>
+                            <td><button class="availability-button">Availability</button>
+                            <button class="assign-button">Assing</button>
                         <button class="delete-button">Delete</button></td>
                         </tr>
                     </tbody>
