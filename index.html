@@ -111,9 +111,52 @@
             </div>
         </div>
     </main>
-    <div class="new-project-modal">
+    <div class="add-modal">
+        <h2>Add New Employee</h2>
+        <div class="add-form">
+            <div class="field-container">
+                <label for="employee-name">Name: *</label>
+                <input id='employee-name' type="text"  name="employee-name" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder="">
+                <span class="error-message" id="employee-name-error">Name must be at least 3 characters and contain only letters</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-surname">Surname: *</label>
+                <input id='employee-surname' type="text"  name="employee-surname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder="">
+                <span class="error-message" id="employee-surname-error">Surname must be at least 3 characters and contain only letters</span>
+            </div>
+            <div class="field-container">
+                <label for="birth-date">Date of Birth: *</label>
+                <input id='birth-date' type="date"  name="birth-date" max="" aria-describedby="birth-date-error" required placeholder="">
+                <span class="error-message" id="birth-date-error">You must be at least 18 years old</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-position">Position: *</label>
+                <select id='employee-position' aria-describedby="employee-position-error" required>
+                    <option value="" disabled selected hidden>Select position</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Middle">Middle</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Architect">Architect</option>
+                    <option value="BO">BO</option>
+                </select>
+                <span class="error-message" id="employee-position-error">Please select a position</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-salary">Salary: *</label>
+                <input id='employee-salary' type="number"  name="employee-salary" min="1" aria-describedby="employee-salary-error" required placeholder="">
+                <span class="error-message" id="employee-salary-error">Salary must be greater than 0</span>
+            </div>
+            <div class="buttons-section">
+                <button class="add-button" disabled>Add</button>
+                <button class='cancel-button'>Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-modal hidden">
         <h2>Add New Project</h2>
-        <div class="add-project-form">
+        <div class="add-form">
             <div class="field-container">
                 <label for="project-name">Project Name: *</label>
                 <input id='project-name' type="text"  name="projectName" minlength="3" aria-describedby="project-name-error" required placeholder="">

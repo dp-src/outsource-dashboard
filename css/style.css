@@ -256,7 +256,7 @@ button:disabled {
 
 /* add new project modal*/
 
-.new-project-modal {
+.add-modal {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -271,14 +271,14 @@ button:disabled {
     padding: 2em;
 }
 
-.add-project-form {
+.add-form {
     display: flex;
     flex-direction: column;
 }
 
-input {
+input, select {
     height: 2em;
-    padding: 1em;
+    padding: 0 0.5em;
 }
 
 .field-container {
@@ -316,6 +316,12 @@ input:invalid:not(:placeholder-shown) +.error-message {
 
 input:invalid:not(:placeholder-shown):focus {
     outline: none;
-    border: 3px solid var(--danger-color);
+    border: 2px solid var(--danger-color);
+    border-radius: 3px;
+}
+
+select:invalid {
+    outline: none;
+    border: 2px solid var(--danger-color);
     border-radius: 3px;
 }
