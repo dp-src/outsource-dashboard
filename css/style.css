@@ -12,8 +12,10 @@
     --unactive-color: #a9a9a9;
     --light-text-color: #ffffff;
     --dark-text-color: #000000;
-    --delete-color: #df5b4d;
-    --delete-hover-color: #e14332;
+    --danger-color: #df5b4d;
+    --danger-hover-color: #e14332;
+    --success-color: #46966a;
+    --success-hover-color: #248f54;
 }
 
 * {
@@ -194,12 +196,12 @@ td {
 
 }
 
-.delete-button {
-    background-color: var(--delete-color);
+.delete-button, .cancel-button {
+    background-color: var(--danger-color);
 }
 
-.delete-button:hover {
-    background-color: var(--delete-hover-color);
+.delete-button:hover, .cancel-button:hover {
+    background-color: var(--danger-hover-color);
     color: var(--light-text-color);
 }
 
@@ -217,6 +219,16 @@ td {
     color: var(--light-text-color);
 }
 
+.add-button:not(:disabled) {
+    background-color: var(--success-color);
+}
+
+button:disabled {
+    background-color: var(--unactive-color);
+    cursor: default;
+    color: var(--light-text-color);
+}
+
 .total {
     font-weight: 600;
     font-size: 1.1em;
@@ -230,7 +242,7 @@ td {
 }
 
 .negative-income {
-    color: var(--delete-color)
+    color: var(--danger-color)
 }
 
 /* Employees */
@@ -266,6 +278,7 @@ td {
 
 input {
     height: 2em;
+    padding: 1em;
 }
 
 .field-container {
@@ -276,11 +289,22 @@ input {
     margin-bottom: 3em;
 }
 
+.buttons-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.buttons-section button {
+    padding: 0.8em 1.5em;
+}
+
 
 /* errors */
 
 .error-message {
-    color: var(--delete-color);
+    color: var(--danger-color);
     display: none;
     position: absolute;
     bottom: -1.5em;
@@ -288,4 +312,10 @@ input {
 
 input:invalid:not(:placeholder-shown) +.error-message {
     display: block;
+}
+
+input:invalid:not(:placeholder-shown):focus {
+    outline: none;
+    border: 3px solid var(--danger-color);
+    border-radius: 3px;
 }
