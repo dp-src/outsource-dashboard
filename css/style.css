@@ -24,11 +24,11 @@ main {
     display: flex;
 }
 
-h1 {
+h1, h2 {
     font-size: 25px;
 }
 
-.hidden {
+body .hidden {
     display: none;
 }
 
@@ -240,4 +240,52 @@ td {
 
 .hidden {
     display: none;
+}
+
+/* add new project modal*/
+
+.new-project-modal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 2em;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.159) 0px 0px 50px;
+    padding: 2em;
+}
+
+.add-project-form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    height: 2em;
+}
+
+.field-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 3em;
+}
+
+
+/* errors */
+
+.error-message {
+    color: var(--delete-color);
+    display: none;
+    position: absolute;
+    bottom: -1.5em;
+}
+
+input:invalid:not(:placeholder-shown) +.error-message {
+    display: block;
 }

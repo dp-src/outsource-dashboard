@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/icon.svg">
     <script type="module" src="./js/main.js"></script>
     <title>Dashboard</title>
 </head>
@@ -110,5 +111,34 @@
             </div>
         </div>
     </main>
+    <div class="new-project-modal">
+        <h2>Add New Project</h2>
+        <div class="add-project-form">
+            <div class="field-container">
+                <label for="project-name">Project Name: *</label>
+                <input id='project-name' type="text"  name="projectName" minlength="3" aria-describedby="project-name-error" required placeholder="">
+                <span class="error-message" id="project-name-error">Project name must be at least 3 characters</span>
+            </div>
+            <div class="field-container">
+                <label for="company-name">Company Name: *</label>
+                <input id='company-name' type="text"  name="companyName" minlength="2" aria-describedby="company-name-error" required placeholder="">
+                <span class="error-message" id="company-name-error">Company name must be at least 2 characters</span>
+            </div>
+            <div class="field-container">
+                <label for="project-budget">Budget: *</label>
+                <input id='project-budget' type="number"  name="project-budget" min="1" aria-describedby="project-budget-error" required placeholder="">
+                <span class="error-message" id="project-budget-error">Budget must be greater than 0</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-capacity">Employee Capacity: *</label>
+                <input id='employee-capacity' type="number"  name="employee-capacity" min="1" aria-describedby="employee-capacity-error" required placeholder="">
+                <span class="error-message" id="employee-capacity-error">Employee capacity must be at least 1</span>
+            </div>
+            <div class="buttons-section">
+                <button class="modal-add-button">Add</button>
+                <button class='modal-cancel-button'>Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
