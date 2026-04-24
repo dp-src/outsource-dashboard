@@ -111,22 +111,22 @@
             </div>
         </div>
     </main>
-    <div class="add-modal">
+    <div id='add-new-employee' class="add-modal hidden">
         <h2>Add New Employee</h2>
         <div class="add-form">
             <div class="field-container">
                 <label for="employee-name">Name: *</label>
-                <input id='employee-name' type="text"  name="employee-name" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder="">
+                <input id='employee-name' type="text"  name="employee-name" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder=" ">
                 <span class="error-message" id="employee-name-error">Name must be at least 3 characters and contain only letters</span>
             </div>
             <div class="field-container">
                 <label for="employee-surname">Surname: *</label>
-                <input id='employee-surname' type="text"  name="employee-surname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder="">
+                <input id='employee-surname' type="text"  name="employee-surname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder=" ">
                 <span class="error-message" id="employee-surname-error">Surname must be at least 3 characters and contain only letters</span>
             </div>
             <div class="field-container">
                 <label for="birth-date">Date of Birth: *</label>
-                <input id='birth-date' type="date"  name="birth-date" max="" aria-describedby="birth-date-error" required placeholder="">
+                <input id='birth-date' type="date"  name="birth-date" max="2026-01-01" aria-describedby="birth-date-error" required placeholder=" ">
                 <span class="error-message" id="birth-date-error">You must be at least 18 years old</span>
             </div>
             <div class="field-container">
@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    <div class="add-modal hidden">
+    <div id='add-new-project' class="add-modal hidden">
         <h2>Add New Project</h2>
         <div class="add-form">
             <div class="field-container">

@@ -223,6 +223,11 @@ td {
     background-color: var(--success-color);
 }
 
+.add-button:hover {
+    color: var(--light-text-color);
+    background-color: var(--success-hover-color);
+}
+
 button:disabled {
     background-color: var(--unactive-color);
     cursor: default;
@@ -276,6 +281,10 @@ button:disabled {
     flex-direction: column;
 }
 
+label {
+    font-weight: bold;
+}
+
 input, select {
     height: 2em;
     padding: 0 0.5em;
@@ -307,21 +316,32 @@ input, select {
     color: var(--danger-color);
     display: none;
     position: absolute;
-    bottom: -1.5em;
+    top: 110%;
+    left: 0;
+    font-size: 0.8em;
+}
+
+input:invalid:not(:placeholder-shown),
+select:user-invalid {
+    outline: none;
+    border: 1px solid var(--danger-color);
+    border-radius: 3px;
+}
+
+input:invalid:not(:placeholder-shown) + .error-message {
+    display: block;
+}
+
+select:user-invalid + .error-message {
+    display: block;
 }
 
 input:invalid:not(:placeholder-shown) +.error-message {
     display: block;
 }
 
-input:invalid:not(:placeholder-shown):focus {
+select:user-invalid {
     outline: none;
-    border: 2px solid var(--danger-color);
-    border-radius: 3px;
-}
-
-select:invalid {
-    outline: none;
-    border: 2px solid var(--danger-color);
+    border: 1px solid var(--danger-color);
     border-radius: 3px;
 }
