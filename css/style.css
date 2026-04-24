@@ -223,7 +223,7 @@ td {
     background-color: var(--success-color);
 }
 
-.add-button:hover {
+.add-button:not(:disabled):hover {
     color: var(--light-text-color);
     background-color: var(--success-hover-color);
 }
@@ -268,12 +268,13 @@ button:disabled {
     max-width: 400px;
     gap: 2em;
     background-color: white;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.159) 0px 0px 50px;
     padding: 2em;
+    transition: transform 0.3s ease;
 }
 
 .add-form {
@@ -350,6 +351,11 @@ select:user-invalid {
 
 .sidebar.collapsed {
     transform: translateX(-100%);
+    position: absolute;
+}
+
+.add-modal.collapsed {
+    transform: translateX(+100%);
     position: absolute;
 }
 

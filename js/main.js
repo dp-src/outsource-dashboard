@@ -54,3 +54,23 @@ document.addEventListener("click", (event) => {
     sidebarOpenButton.classList.add("hidden");
   }
 });
+
+// add project
+
+//open modal
+
+const contentHeader = document.querySelector(".header");
+const addProjectBtn = document.getElementById("add-project");
+const addProjectModal = document.getElementById("add-new-project");
+
+addProjectBtn.addEventListener("click", (event) => {
+  addProjectModal.classList.remove("collapsed");
+});
+
+// cancel
+
+const projectCancelBtn = document.querySelector("#project-modal-cancel");
+
+projectCancelBtn.addEventListener("click", (event) => {
+  addProjectModal.classList.add("collapsed");
+});
