@@ -44,9 +44,10 @@ body .hidden {
     text-decoration: none;
     color: white;
     position: relative;
+    transition: transform 0.3s ease;
 }
 
-.sidebar-toggle {
+.sidebar-close-button {
     font-size: 25px;
     height: 50px;
     background-color: var(--primary-dark);
@@ -119,7 +120,7 @@ body .hidden {
 .content-wrapper {
     display: flex;
     width: 100%;
-    padding: 2em;
+    padding: 3em 2em;
 }
 
 /* projects*/
@@ -343,4 +344,24 @@ select:user-invalid {
     outline: none;
     border: 1px solid var(--danger-color);
     border-radius: 3px;
+}
+
+/* hide */
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    position: absolute;
+}
+
+.sidebar-open-button {
+    position: absolute;
+    margin: 0.5em;
+    height: 2em;
+    width: 3em;
+    background-color: var(--primary-light);
+    opacity: 50%;
+}
+
+.sidebar-open-button:hover {
+    opacity: 100%;
 }
