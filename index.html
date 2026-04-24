@@ -114,7 +114,7 @@
     </main>
     <div id='add-new-employee' class="add-modal hidden">
         <h2>Add New Employee</h2>
-        <div class="add-form">
+        <form class="add-form">
             <div class="field-container">
                 <label for="employee-name">Name: *</label>
                 <input id='employee-name' type="text"  name="employee-name" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder=" ">
@@ -152,12 +152,12 @@
                 <button class="add-button" disabled>Add</button>
                 <button class='cancel-button'>Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
 
     <div id='add-new-project' class="add-modal collapsed">
         <h2>Add New Project</h2>
-        <div class="add-form">
+        <form id="project-add-form" class="add-form">
             <div class="field-container">
                 <label for="project-name">Project Name: *</label>
                 <input id='project-name' type="text"  name="projectName" minlength="3" aria-describedby="project-name-error" required placeholder="">
@@ -182,7 +182,7 @@
                 <button id="project-modal-add" class="add-button" disabled>Add</button>
                 <button id="project-modal-cancel" class='cancel-button'>Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>

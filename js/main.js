@@ -69,8 +69,21 @@ addProjectBtn.addEventListener("click", (event) => {
 
 // cancel
 
+const projectAddBtn = document.querySelector("#project-modal-add");
 const projectCancelBtn = document.querySelector("#project-modal-cancel");
 
 projectCancelBtn.addEventListener("click", (event) => {
   addProjectModal.classList.add("collapsed");
+});
+
+// add button activation
+
+const form = document.querySelector("#project-add-form");
+
+form.addEventListener("input", (event) => {
+  if (form.checkValidity()) {
+    projectAddBtn.disabled = false;
+  } else {
+    projectAddBtn.disabled = true;
+  }
 });
