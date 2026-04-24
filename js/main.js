@@ -74,6 +74,7 @@ const projectCancelBtn = document.querySelector("#project-modal-cancel");
 
 projectCancelBtn.addEventListener("click", (event) => {
   addProjectModal.classList.add("collapsed");
+  form.reset();
 });
 
 // add button activation
@@ -86,4 +87,25 @@ form.addEventListener("input", (event) => {
   } else {
     projectAddBtn.disabled = true;
   }
+});
+
+// add project data
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  //collect data
+  const formData = new FormData(form);
+  const projectData = Object.fromEntries(formData.entries());
+
+  // recieve saved data or empty array
+  const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+
+  savedProjects.push(projectData);
+
+  localStorage.setItem("projects", JSON.stringify(savedProjects));
+
+  addProjectModal.classList.add("collapsed");
+  form.reset();
+  projectAddBtn.disabled = true;
 });
