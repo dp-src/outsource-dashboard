@@ -9,3 +9,18 @@ export function calculateAge(birthDate) {
   }
   return age;
 }
+
+//estimated payment
+
+export function calculateEstimatedPayment(employee) {
+  const { salary, assignments } = employee;
+
+  if (!assignments || assignments.length === 0) {
+    return salary * 0.5;
+  }
+
+  return assignments.reduce((sum, task) => {
+    const effectiveRate = Math.max(0.5, task.capacity);
+    return sum + salary * effectiveRate;
+  }, 0);
+}

@@ -180,3 +180,55 @@ const maxDate = new Date(maxYear, today.getMonth(), today.getDate())
   .toISOString()
   .split("T")[0];
 dateInput.setAttribute("max", maxDate);
+
+// delete project
+
+document
+  .querySelector("#projects-table-body")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-button")) {
+      const index = event.target.dataset.index;
+      deleteProject(index);
+    }
+  });
+
+function deleteProject(index) {
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
+  const projectToDelete = projects[index];
+
+  const isConfirmed = confirm(
+    `Are you sure you want to delete ${projectToDelete.projectName} project?`,
+  );
+
+  if (isConfirmed) {
+    projects.splice(index, 1);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    renderProjects();
+  }
+}
+
+// delete employee
+
+document
+  .querySelector("#employees-table-body")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-button")) {
+      const index = event.target.dataset.index;
+      deleteEmployee(index);
+    }
+  });
+
+function deleteEmployee(index) {
+  let employees = JSON.parse(localStorage.getItem("employees")) || [];
+  const employeeToDelete = employees[index];
+
+  const isConfirmed = confirm(
+    `Are you sure you want to delete ${employeeToDelete.employeeName} ${employeeToDelete.employeeSurname}?`,
+  );
+
+  if (isConfirmed) {
+    employees.splice(index, 1);
+    localStorage.setItem("employees", JSON.stringify(employees));
+    renderEmployees();
+  }
+}
