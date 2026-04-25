@@ -1,3 +1,5 @@
+import { renderProjects, renderEmployees } from "./render.js";
+
 // switch tabs
 
 const navTabs = document.querySelector(".sidebar-nav");
@@ -58,7 +60,6 @@ document.addEventListener("click", (event) => {
 // add project
 
 //open modal
-
 const contentHeader = document.querySelector(".header");
 const addProjectBtn = document.getElementById("add-project");
 const addProjectModal = document.getElementById("add-new-project");
@@ -108,4 +109,74 @@ form.addEventListener("submit", (event) => {
   addProjectModal.classList.add("collapsed");
   form.reset();
   projectAddBtn.disabled = true;
+
+  renderProjects();
 });
+
+// add employee
+
+//open modal
+const addEmployeeBtn = document.getElementById("add-employee");
+const addEmployeeModal = document.getElementById("add-new-employee");
+
+addEmployeeBtn.addEventListener("click", (event) => {
+  addEmployeeModal.classList.remove("collapsed");
+});
+
+// cancel
+
+const employeeAddBtn = document.querySelector("#employee-modal-add");
+const employeeCancelBtn = document.querySelector("#employee-modal-cancel");
+
+employeeCancelBtn.addEventListener("click", (event) => {
+  addEmployeeModal.classList.add("collapsed");
+  employeeForm.reset();
+});
+
+// add button activation
+
+const employeeForm = document.querySelector("#employee-add-form");
+
+employeeForm.addEventListener("input", (event) => {
+  if (employeeForm.checkValidity()) {
+    employeeAddBtn.disabled = false;
+  } else {
+    employeeAddBtn.disabled = true;
+  }
+});
+
+// add employee data
+
+employeeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  //collect data
+  const formData = new FormData(employeeForm);
+  const employeeData = Object.fromEntries(formData.entries());
+
+  // recieve saved data or empty array
+  const savedEmployees = JSON.parse(localStorage.getItem("employee")) || [];
+
+  savedEmployees.push(employeeData);
+
+  localStorage.setItem("employees", JSON.stringify(savedEmployees));
+
+  addEmployeeModal.classList.add("collapsed");
+  employeeForm.reset();
+  employeeAddBtn.disabled = true;
+
+  renderEmployees();
+});
+
+renderProjects();
+renderEmployees();
+
+// birthdate
+
+const dateInput = document.getElementById("birth-date");
+const today = new Date();
+const maxYear = today.getFullYear() - 18;
+const maxDate = new Date(maxYear, today.getMonth(), today.getDate())
+  .toISOString()
+  .split("T")[0];
+dateInput.setAttribute("max", maxDate);

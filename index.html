@@ -41,6 +41,7 @@
                 <a href="#" data-tab="employees" class="nav-item">Employees</a>
             </nav>
         </aside>
+
         <div class="content-wrapper">
             <div id="projects-content" class="contents">
                 <div class="header">
@@ -60,24 +61,16 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>TechCorp</td>
-                            <td>E-Commerce Platform</td>
-                            <td>$12500.00</td>
-                            <td>3.0/3</td>
-                            <td><button class="show-button">Show employees</button></td>
-                            <td class="negative-income">$-3958.33</td>
-                            <td><button class="delete-button">Delete</button></td>
-                        </tr>
+                    <tbody id="projects-table-body">
                     </tbody>
                 </table>
-                <div class="total">Total Estimated Income: <span class="total negative-income">$-16240.83</span> <span class="total-note">(Bench payments: $8700.00)</span></div>
+                <div class="total">Total Estimated Income: <span class="total negative-income">$X</span> <span class="total-note">(Bench payments: $Y)</span></div>
             </div>
+
             <div id="employees-content" class="contents hidden">
                 <div class="header">
                     <h1>Employees</h1>
-                    <button id="add-project">+ Add Employee</button>
+                    <button id="add-employee">+ Add Employee</button>
                 </div>
                 <table class="table">
                     <thead>
@@ -93,7 +86,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="employees-table-body">
                         <tr>
                             <td>John</td>
                             <td>Smith</td>
@@ -112,27 +105,27 @@
             </div>
         </div>
     </main>
-    <div id='add-new-employee' class="add-modal hidden">
+    <div id='add-new-employee' class="add-modal collapsed">
         <h2>Add New Employee</h2>
-        <form class="add-form">
+        <form id="employee-add-form" class="add-form">
             <div class="field-container">
                 <label for="employee-name">Name: *</label>
-                <input id='employee-name' type="text"  name="employee-name" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder=" ">
+                <input id='employee-name' type="text"  name="employeeName" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder=" ">
                 <span class="error-message" id="employee-name-error">Name must be at least 3 characters and contain only letters</span>
             </div>
             <div class="field-container">
                 <label for="employee-surname">Surname: *</label>
-                <input id='employee-surname' type="text"  name="employee-surname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder=" ">
+                <input id='employee-surname' type="text"  name="employeeSurname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder=" ">
                 <span class="error-message" id="employee-surname-error">Surname must be at least 3 characters and contain only letters</span>
             </div>
             <div class="field-container">
                 <label for="birth-date">Date of Birth: *</label>
-                <input id='birth-date' type="date"  name="birth-date" max="2026-01-01" aria-describedby="birth-date-error" required placeholder=" ">
+                <input id='birth-date' type="date"  name="birthDate" max="2026-01-01" aria-describedby="birth-date-error" required placeholder=" ">
                 <span class="error-message" id="birth-date-error">You must be at least 18 years old</span>
             </div>
             <div class="field-container">
                 <label for="employee-position">Position: *</label>
-                <select id='employee-position' aria-describedby="employee-position-error" required>
+                <select id='employee-position' name="employeePosition" aria-describedby="employee-position-error" required>
                     <option value="" disabled selected hidden>Select position</option>
                     <option value="Junior">Junior</option>
                     <option value="Middle">Middle</option>
@@ -145,12 +138,12 @@
             </div>
             <div class="field-container">
                 <label for="employee-salary">Salary: *</label>
-                <input id='employee-salary' type="number"  name="employee-salary" min="1" aria-describedby="employee-salary-error" required placeholder="">
+                <input id='employee-salary' type="number"  name="employeeSalary" min="1" aria-describedby="employee-salary-error" required placeholder="">
                 <span class="error-message" id="employee-salary-error">Salary must be greater than 0</span>
             </div>
             <div class="buttons-section">
-                <button class="add-button" disabled>Add</button>
-                <button class='cancel-button'>Cancel</button>
+                <button id="employee-modal-add" class="add-button" disabled>Add</button>
+                <button id="employee-modal-cancel" class='cancel-button'>Cancel</button>
             </div>
         </form>
     </div>
@@ -170,12 +163,12 @@
             </div>
             <div class="field-container">
                 <label for="project-budget">Budget: *</label>
-                <input id='project-budget' type="number"  name="project-budget" min="1" aria-describedby="project-budget-error" required placeholder="">
+                <input id='project-budget' type="number"  name="projectBudget" min="1" aria-describedby="project-budget-error" required placeholder="">
                 <span class="error-message" id="project-budget-error">Budget must be greater than 0</span>
             </div>
             <div class="field-container">
                 <label for="employee-capacity">Employee Capacity: *</label>
-                <input id='employee-capacity' type="number"  name="employee-capacity" min="1" aria-describedby="employee-capacity-error" required placeholder="">
+                <input id='employee-capacity' type="number"  name="employeeCapacity" min="1" aria-describedby="employee-capacity-error" required placeholder="">
                 <span class="error-message" id="employee-capacity-error">Employee capacity must be at least 1</span>
             </div>
             <div class="buttons-section">
