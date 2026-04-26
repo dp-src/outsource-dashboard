@@ -87,19 +87,6 @@
                         </tr>
                     </thead>
                     <tbody id="employees-table-body">
-                        <tr>
-                            <td>John</td>
-                            <td>Smith</td>
-                            <td>29</td>
-                            <td>Junior</td>
-                            <td>$3750</td>
-                            <td>$3750</td>
-                            <td><button class="show-button">Show assignments (<span id='assignment-count'>1</span>) <span></span></button></td>
-                            <td class="negative-income">$-5.33</td>
-                            <td><button class="availability-button">Availability</button>
-                            <button class="assign-button">Assing</button>
-                        <button class="delete-button">Delete</button></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -142,8 +129,8 @@
                 <span class="error-message" id="employee-salary-error">Salary must be greater than 0</span>
             </div>
             <div class="buttons-section">
-                <button id="employee-modal-add" class="add-button" disabled>Add</button>
-                <button id="employee-modal-cancel" class='cancel-button'>Cancel</button>
+                <button type="submit" id="employee-modal-add" class="add-button" disabled>Add</button>
+                <button type="button" id="employee-modal-cancel" class='cancel-button'>Cancel</button>
             </div>
         </form>
     </div>
@@ -172,8 +159,8 @@
                 <span class="error-message" id="employee-capacity-error">Employee capacity must be at least 1</span>
             </div>
             <div class="buttons-section">
-                <button id="project-modal-add" class="add-button" disabled>Add</button>
-                <button id="project-modal-cancel" class='cancel-button'>Cancel</button>
+                <button type="submit" id="project-modal-add" class="add-button" disabled>Add</button>
+                <button type="button" id="project-modal-cancel" class='cancel-button'>Cancel</button>
             </div>
         </form>
     </div>

@@ -1,12 +1,13 @@
 import { calculateAge } from "./calculations.js";
+import { getMonthlyData, saveMonthlyData } from "./main.js";
 
 export function renderProjects() {
   const tableBody = document.querySelector("table tbody");
-  const projects = JSON.parse(localStorage.getItem("projects")) || [];
+  const { projects } = getMonthlyData();
 
   tableBody.innerHTML = "";
 
-  projects.forEach((project, index) => {
+  projects.forEach((project, id) => {
     const row = `<tr>
                             <td>${project.companyName}</td>
                             <td>${project.projectName}</td>
@@ -14,7 +15,7 @@ export function renderProjects() {
                             <td>X/${project.employeeCapacity}</td>
                             <td><button class="show-button">Show employees</button></td>
                             <td>$X</td>
-                            <td><button class="delete-button" data-index="${index}">Delete</button></td>
+                            <td><button class="delete-button" data-id="${project.id}">Delete</button></td>
                         </tr>`;
     tableBody.insertAdjacentHTML("beforeend", row);
   });
@@ -22,11 +23,11 @@ export function renderProjects() {
 
 export function renderEmployees() {
   const tableBody = document.querySelector("#employees-table-body");
-  const employees = JSON.parse(localStorage.getItem("employees")) || [];
+  const { employees } = getMonthlyData();
 
   tableBody.innerHTML = "";
 
-  employees.forEach((employee, index) => {
+  employees.forEach((employee, id) => {
     const age = calculateAge(employee.birthDate);
     const row = `<tr>
                             <td>${employee.employeeName}</td>
@@ -39,7 +40,7 @@ export function renderEmployees() {
                             <td class="negative-income">$X</td>
                             <td><button class="availability-button">Availability</button>
                             <button class="assign-button">Assign</button>
-                        <button class="delete-button" data-index="${index}">Delete</button></td>
+                        <button class="delete-button" data-id="${employee.id}">Delete</button></td>
     </tr>`;
     tableBody.insertAdjacentHTML("beforeend", row);
   });

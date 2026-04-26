@@ -1,5 +1,28 @@
 import { renderProjects, renderEmployees } from "./render.js";
 
+let currentYear = 2026;
+let currentMonth = 4;
+const getSnapshotKey = () => `${currentYear}-${currentMonth}`;
+
+//load monthlyData
+
+export function getMonthlyData() {
+  const allData = JSON.parse(localStorage.getItem("monthlyData")) || {};
+  const key = getSnapshotKey();
+
+  return allData[key] || { projects: [], employees: [] };
+}
+
+//save monthlyData
+
+export function saveMonthlyData(data) {
+  const allData = JSON.parse(localStorage.getItem("monthlyData")) || {};
+  const key = getSnapshotKey();
+
+  allData[key] = data;
+  localStorage.setItem("monthlyData", JSON.stringify(allData));
+}
+
 // switch tabs
 
 const navTabs = document.querySelector(".sidebar-nav");
@@ -60,6 +83,8 @@ document.addEventListener("click", (event) => {
 // add project
 
 //open modal
+
+const form = document.querySelector("#project-add-form");
 const contentHeader = document.querySelector(".header");
 const addProjectBtn = document.getElementById("add-project");
 const addProjectModal = document.getElementById("add-new-project");
@@ -80,8 +105,6 @@ projectCancelBtn.addEventListener("click", (event) => {
 
 // add button activation
 
-const form = document.querySelector("#project-add-form");
-
 form.addEventListener("input", (event) => {
   if (form.checkValidity()) {
     projectAddBtn.disabled = false;
@@ -99,12 +122,12 @@ form.addEventListener("submit", (event) => {
   const formData = new FormData(form);
   const projectData = Object.fromEntries(formData.entries());
 
+  projectData.id = Date.now();
+
   // recieve saved data or empty array
-  const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
-
-  savedProjects.push(projectData);
-
-  localStorage.setItem("projects", JSON.stringify(savedProjects));
+  const monthlyData = getMonthlyData();
+  monthlyData.projects.push(projectData);
+  saveMonthlyData(monthlyData);
 
   addProjectModal.classList.add("collapsed");
   form.reset();
@@ -154,12 +177,12 @@ employeeForm.addEventListener("submit", (event) => {
   const formData = new FormData(employeeForm);
   const employeeData = Object.fromEntries(formData.entries());
 
+  employeeData.id = Date.now();
+
   // recieve saved data or empty array
-  const savedEmployees = JSON.parse(localStorage.getItem("employee")) || [];
-
-  savedEmployees.push(employeeData);
-
-  localStorage.setItem("employees", JSON.stringify(savedEmployees));
+  const monthlyData = getMonthlyData();
+  monthlyData.employees.push(employeeData);
+  saveMonthlyData(monthlyData);
 
   addEmployeeModal.classList.add("collapsed");
   employeeForm.reset();
@@ -183,52 +206,85 @@ dateInput.setAttribute("max", maxDate);
 
 // delete project
 
-document
-  .querySelector("#projects-table-body")
-  .addEventListener("click", (event) => {
-    if (event.target.classList.contains("delete-button")) {
-      const index = event.target.dataset.index;
-      deleteProject(index);
-    }
-  });
+function deleteProject(id) {
+  let monthlyData = getMonthlyData();
 
-function deleteProject(index) {
-  let projects = JSON.parse(localStorage.getItem("projects")) || [];
-  const projectToDelete = projects[index];
+  const projectToDelete = monthlyData.projects.find(
+    (project) => project.id === id,
+  );
+  if (!projectToDelete) return;
 
   const isConfirmed = confirm(
     `Are you sure you want to delete ${projectToDelete.projectName} project?`,
   );
 
   if (isConfirmed) {
-    projects.splice(index, 1);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    monthlyData.projects = monthlyData.projects.filter(
+      (project) => project.id !== id,
+    );
+    saveMonthlyData(monthlyData);
     renderProjects();
   }
 }
 
-// delete employee
-
 document
-  .querySelector("#employees-table-body")
+  .querySelector("#projects-table-body")
   .addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-button")) {
-      const index = event.target.dataset.index;
-      deleteEmployee(index);
+      const id = Number(event.target.dataset.id);
+      deleteProject(id);
     }
   });
 
-function deleteEmployee(index) {
-  let employees = JSON.parse(localStorage.getItem("employees")) || [];
-  const employeeToDelete = employees[index];
+// delete employee
+
+function deleteEmployee(id) {
+  let monthlyData = getMonthlyData();
+
+  const employeeToDelete = monthlyData.employees.find(
+    (employee) => employee.id === id,
+  );
+  if (!employeeToDelete) return;
 
   const isConfirmed = confirm(
     `Are you sure you want to delete ${employeeToDelete.employeeName} ${employeeToDelete.employeeSurname}?`,
   );
 
   if (isConfirmed) {
-    employees.splice(index, 1);
-    localStorage.setItem("employees", JSON.stringify(employees));
+    monthlyData.employees = monthlyData.employees.filter(
+      (employee) => employee.id !== id,
+    );
+
+    saveMonthlyData(monthlyData);
     renderEmployees();
   }
+}
+
+document
+  .querySelector("#employees-table-body")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-button")) {
+      const id = Number(event.target.dataset.id);
+      deleteEmployee(id);
+    }
+  });
+
+// select month
+
+const monthSelect = document.querySelector(".month-select");
+const yearSelect = document.querySelector(".year-select");
+
+monthSelect.addEventListener("change", (event) => {
+  currentMonth = Number(event.target.value);
+  refreshUI();
+});
+
+yearSelect.addEventListener("change", (event) => {
+  currentYear = Number(event.target.value);
+  refreshUI();
+});
+
+function refreshUI() {
+  renderEmployees();
+  renderProjects();
 }

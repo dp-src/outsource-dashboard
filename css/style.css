@@ -30,6 +30,9 @@ h1, h2 {
     font-size: 25px;
 }
 
+body {
+    overflow: hidden;
+}
 body .hidden {
     display: none;
 }
