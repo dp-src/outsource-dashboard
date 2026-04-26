@@ -45,3 +45,35 @@ export function renderEmployees() {
     tableBody.insertAdjacentHTML("beforeend", row);
   });
 }
+
+//assign
+
+export function showAssignPopup() {
+  const assignPopup = document.querySelector(".assign-popup");
+  assignPopup.innerHTML = "";
+  const popupContent = `<h2>Assign X Y</h2>
+        <div class="assignment-employee-info">
+            Current capacity: X/1.5
+            <br>
+            Available: 1.5 - X
+        </div>
+        <select name="selectProject" id="select-project" class="select-project">
+            <option value="projectid">project name</option>
+        </select>
+        <div class="assignment-settings">
+            <label for="capacity-allocation">Capacity Allocation: X</label>
+            <input type="range" id="capacity-allocation" min="0" max="1.5" step="0.1" value="1.0">
+            <label for="project-fit">Project Fit: Y</label>
+            <input type="range" id="project-fit" min="0" max="1" step="0.1" value="1.0">
+            <div class="assignment-project-info">
+                Project Capacity: X/Y
+                <br>Effective Capacity: Capacity Allocation * Project Fit
+                <br>After Assignment: Effective Capacity сумма / max project capacity (Employee Capacity)
+            </div>
+        </div>
+        <div class="buttons-section">
+            <button type="submit" id="assign-modal-add" class="add-button" disabled>Assign</button>
+            <button type="button" id="assign-modal-cancel" class='cancel-button'>Cancel</button>
+        </div>`;
+  assignPopup.insertAdjacentHTML("beforeend", popupContent);
+}

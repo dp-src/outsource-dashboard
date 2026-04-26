@@ -1,4 +1,4 @@
-import { renderProjects, renderEmployees } from "./render.js";
+import { renderProjects, renderEmployees, showAssignPopup } from "./render.js";
 
 let currentYear = 2026;
 let currentMonth = 4;
@@ -21,6 +21,26 @@ export function saveMonthlyData(data) {
 
   allData[key] = data;
   localStorage.setItem("monthlyData", JSON.stringify(allData));
+}
+
+// select month
+
+const monthSelect = document.querySelector(".month-select");
+const yearSelect = document.querySelector(".year-select");
+
+monthSelect.addEventListener("change", (event) => {
+  currentMonth = Number(event.target.value);
+  refreshUI();
+});
+
+yearSelect.addEventListener("change", (event) => {
+  currentYear = Number(event.target.value);
+  refreshUI();
+});
+
+function refreshUI() {
+  renderEmployees();
+  renderProjects();
 }
 
 // switch tabs
@@ -269,22 +289,22 @@ document
     }
   });
 
-// select month
+// assign
 
-const monthSelect = document.querySelector(".month-select");
-const yearSelect = document.querySelector(".year-select");
+const assignBtn = document.querySelector(".assign-button");
+const assignPopup = document.querySelector(".assign-popup");
 
-monthSelect.addEventListener("change", (event) => {
-  currentMonth = Number(event.target.value);
-  refreshUI();
+assignBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  assignPopup.classList.remove("hidden");
+  showAssignPopup();
 });
 
-yearSelect.addEventListener("change", (event) => {
-  currentYear = Number(event.target.value);
-  refreshUI();
-});
+document.addEventListener("click", (event) => {
+  const assignCancel = document.querySelector("#assign-modal-cancel");
 
-function refreshUI() {
-  renderEmployees();
-  renderProjects();
-}
+  if (event.target === assignCancel || !assignPopup.contains(event.target)) {
+    assignPopup.innerHTML = "";
+    assignPopup.classList.add("hidden");
+  }
+});

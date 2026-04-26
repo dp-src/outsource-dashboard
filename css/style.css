@@ -16,6 +16,7 @@
     --danger-hover-color: #e14332;
     --success-color: #46966a;
     --success-hover-color: #248f54;
+    --accent-background-color: rgb(245, 245, 245);
 }
 
 * {
@@ -373,4 +374,50 @@ select:user-invalid {
 
 .sidebar-open-button:hover {
     opacity: 100%;
+}
+
+/* assignment popup */
+
+.assign-popup {
+    background-color: white;
+    width: 400px;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.159) 0px 0px 50px;
+    padding: 2em;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    gap: 1em;
+}
+
+.assignment-employee-info {
+    background-color: #fffcf3;
+    padding: 1em;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-hover-color);
+    line-height: 1.5em;
+}
+
+.assign-popup select {
+    height: 2.5em;
+    border-radius: 10px;
+}
+
+.assignment-settings input {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.assignment-project-info {
+    background-color: var(--accent-background-color);
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    line-height: 1.5em;
 }
