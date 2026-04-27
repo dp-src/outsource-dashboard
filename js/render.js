@@ -1,5 +1,6 @@
 import { calculateAge } from "./calculations.js";
 import { getMonthlyData, saveMonthlyData, getDate } from "./storage.js";
+import { popupListeners } from "./events.js";
 
 export function renderProjects() {
   const tableBody = document.querySelector("#projects-table-body");
@@ -50,7 +51,14 @@ export function renderEmployees() {
 
 export function showAssignPopup(employee) {
   const assignPopup = document.querySelector(".assign-popup");
+  const { projects } = getMonthlyData();
+
+  const projectOptions = projects.map(
+    (p) => `<option value ="${p.id}">${p.projectName}</option>`,
+  );
+
   assignPopup.innerHTML = "";
+
   const popupContent = `<h2>Assign ${employee.employeeName} ${employee.employeeSurname}</h2>
         <div class="assignment-employee-info">
             Current capacity: ${employee.capacity}/1.5
@@ -58,22 +66,34 @@ export function showAssignPopup(employee) {
             Available: ${1.5 - employee.capacity}
         </div>
         <select name="selectProject" id="select-project" class="select-project">
-            <option value="projectid">project name</option>
+            <option value="" disabled selected>Select a project</option>
+            ${projectOptions}
         </select>
-        <div class="assignment-settings">
-            <label for="capacity-allocation">Capacity Allocation: X</label>
-            <input type="range" id="capacity-allocation" min="0" max="1.5" step="0.1" value="1.0">
-            <label for="project-fit">Project Fit: Y</label>
-            <input type="range" id="project-fit" min="0" max="1" step="0.1" value="1.0">
+        <div class="assignment-settings hidden">
+            <label for="capacity-allocation">Capacity Allocation: <span id="capacity-allocation">1</span></label>
+            <input type="range" id="capacity-allocation-value" min="0" max="1.5" step="0.1" value="1.0">
+
+            <label for="project-fit">Project Fit: <span id="project-fit">1</span></label>
+            <input type="range" id="project-fit-value" min="0" max="1" step="0.1" value="1.0">
+
             <div class="assignment-project-info">
-                Project Capacity: X/Y
-                <br>Effective Capacity: Capacity Allocation * Project Fit
-                <br>After Assignment: Effective Capacity сумма / max project capacity (Employee Capacity)
+                Project Capacity: <span id="">X</span>/<span id="">Y</span>
+                <br>Effective Capacity: <span id="">Capacity Allocation * Project Fit<span>
+                <br>After Assignment: <span id="">Effective Capacity сумма</span> / <span id="capacity-val">max project capacity (Employee Capacity) </span>
             </div>
         </div>
         <div class="buttons-section">
             <button type="submit" id="assign-modal-add" class="add-button" disabled>Assign</button>
             <button type="button" id="assign-modal-cancel" class='cancel-button'>Cancel</button>
         </div>`;
+
   assignPopup.insertAdjacentHTML("beforeend", popupContent);
+  const selectElement = document.querySelector("#select-project");
+  selectElement.addEventListener("change", () => {
+    if (selectElement.value !== "") {
+      document.querySelector(".assignment-settings").classList.remove("hidden");
+      document.getElementById("assign-modal-add").disabled = false;
+    }
+  });
+  popupListeners();
 }

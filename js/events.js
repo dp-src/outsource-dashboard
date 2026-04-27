@@ -105,3 +105,24 @@ export function initTableEvents() {
     }
   });
 }
+
+// popup
+
+export function popupListeners() {
+  const capacityRange = document.getElementById("capacity-allocation-value");
+  const capacityLabel = document.getElementById("capacity-allocation");
+  const fitRange = document.getElementById("project-fit-value");
+  const fitLabel = document.getElementById("project-fit");
+
+  if (!capacityLabel || !capacityRange) return;
+
+  capacityRange.addEventListener("input", (event) => {
+    capacityLabel.textContent = event.target.value;
+  });
+
+  if (!fitRange || !fitLabel) return;
+
+  fitRange.addEventListener("input", (event) => {
+    fitLabel.textContent = event.target.value;
+  });
+}
