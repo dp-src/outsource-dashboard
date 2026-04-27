@@ -113,16 +113,39 @@ export function popupListeners() {
   const capacityLabel = document.getElementById("capacity-allocation");
   const fitRange = document.getElementById("project-fit-value");
   const fitLabel = document.getElementById("project-fit");
+  const effectiveCapacityLabel = document.getElementById("effective-capacity");
 
-  if (!capacityLabel || !capacityRange) return;
+  const maxProjectCap = document.getElementById("max-project-capacity");
+  const currentProjectCap = document.getElementById("current-project-capacity");
+  const afterAssignmentLabel = document.getElementById(
+    "capacity-after-assignment",
+  );
 
-  capacityRange.addEventListener("input", (event) => {
-    capacityLabel.textContent = event.target.value;
-  });
+  if (!fitRange || !capacityRange) return;
 
-  if (!fitRange || !fitLabel) return;
+  const updateEffectiveCapacity = () => {
+    const cap = Number(capacityRange.value);
+    const fit = Number(fitRange.value);
+    const effectiveCapacity = cap * fit;
 
-  fitRange.addEventListener("input", (event) => {
-    fitLabel.textContent = event.target.value;
-  });
+    if (capacityLabel) capacityLabel.textContent = cap;
+    if (fitLabel) fitLabel.textContent = fit;
+    if (effectiveCapacityLabel)
+      effectiveCapacityLabel.textContent = effectiveCapacity.toFixed(2);
+    if (maxProjectCap && afterAssignmentLabel) {
+      const max = Number(maxProjectCap.textContent) || 0;
+      const current = Number(currentProjectCap.textContent) || 0;
+
+      const afterValue = current + effectiveCapacity;
+      afterAssignmentLabel.textContent = afterValue.toFixed(2);
+    }
+  };
+
+  fitRange.addEventListener("input", updateEffectiveCapacity);
+  capacityRange.addEventListener("input", updateEffectiveCapacity);
+
+  updateEffectiveCapacity();
 }
+
+//projectCapacity = 0;
+//projectCapacity += effectiveCapacity;

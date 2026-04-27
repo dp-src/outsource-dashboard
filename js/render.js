@@ -13,7 +13,7 @@ export function renderProjects() {
                             <td>${project.companyName}</td>
                             <td>${project.projectName}</td>
                             <td>$${project.projectBudget}</td>
-                            <td>X/${project.employeeCapacity}</td>
+                            <td>${project.currentCapacity}/${project.employeeCapacity}</td>
                             <td><button class="show-button">Show employees</button></td>
                             <td>$X</td>
                             <td><button class="delete-button" data-id="${project.id}" data-type="projects">Delete</button></td>
@@ -77,9 +77,9 @@ export function showAssignPopup(employee) {
             <input type="range" id="project-fit-value" min="0" max="1" step="0.1" value="1.0">
 
             <div class="assignment-project-info">
-                Project Capacity: <span id="">X</span>/<span id="">Y</span>
-                <br>Effective Capacity: <span id="">Capacity Allocation * Project Fit<span>
-                <br>After Assignment: <span id="">Effective Capacity сумма</span> / <span id="capacity-val">max project capacity (Employee Capacity) </span>
+                Project Capacity: <span id="current-project-capacity">0</span>/<span id="max-project-capacity">0</span>
+                <br>Effective Capacity: <span id="effective-capacity"></span>
+                <br>After Assignment: <span id="capacity-after-assignment"></span> / <span id="total-project-capacity">max project capacity (Employee Capacity) </span>
             </div>
         </div>
         <div class="buttons-section">
@@ -88,11 +88,28 @@ export function showAssignPopup(employee) {
         </div>`;
 
   assignPopup.insertAdjacentHTML("beforeend", popupContent);
+
   const selectElement = document.querySelector("#select-project");
   selectElement.addEventListener("change", () => {
     if (selectElement.value !== "") {
-      document.querySelector(".assignment-settings").classList.remove("hidden");
-      document.getElementById("assign-modal-add").disabled = false;
+      const projectId = Number(selectElement.value);
+
+      if (projectId) {
+        const selectedProject = projects.find((p) => p.id === projectId);
+        if (selectedProject) {
+          document.getElementById("max-project-capacity").textContent =
+            selectedProject.employeeCapacity;
+          document.getElementById("current-project-capacity").textContent =
+            selectedProject.currentCapacity || 0;
+          document.getElementById("total-project-capacity").textContent =
+            selectedProject.employeeCapacity;
+
+          document
+            .querySelector(".assignment-settings")
+            .classList.remove("hidden");
+          document.getElementById("assign-modal-add").disabled = false;
+        }
+      }
     }
   });
   popupListeners();
