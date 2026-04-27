@@ -1,8 +1,8 @@
 import { calculateAge } from "./calculations.js";
-import { getMonthlyData, saveMonthlyData } from "./main.js";
+import { getMonthlyData, saveMonthlyData, getDate } from "./storage.js";
 
 export function renderProjects() {
-  const tableBody = document.querySelector("table tbody");
+  const tableBody = document.querySelector("#projects-table-body");
   const { projects } = getMonthlyData();
 
   tableBody.innerHTML = "";
@@ -15,7 +15,7 @@ export function renderProjects() {
                             <td>X/${project.employeeCapacity}</td>
                             <td><button class="show-button">Show employees</button></td>
                             <td>$X</td>
-                            <td><button class="delete-button" data-id="${project.id}">Delete</button></td>
+                            <td><button class="delete-button" data-id="${project.id}" data-type="projects">Delete</button></td>
                         </tr>`;
     tableBody.insertAdjacentHTML("beforeend", row);
   });
@@ -39,8 +39,8 @@ export function renderEmployees() {
                             <td><button class="show-button">Show assignments (<span id='assignment-count'>1</span>) <span></span></button></td>
                             <td class="negative-income">$X</td>
                             <td><button class="availability-button">Availability</button>
-                            <button class="assign-button">Assign</button>
-                        <button class="delete-button" data-id="${employee.id}">Delete</button></td>
+                            <button class="assign-button" data-id="${employee.id}">Assign</button>
+                        <button class="delete-button" data-id="${employee.id}" data-type="employees">Delete</button></td>
     </tr>`;
     tableBody.insertAdjacentHTML("beforeend", row);
   });
@@ -48,14 +48,14 @@ export function renderEmployees() {
 
 //assign
 
-export function showAssignPopup() {
+export function showAssignPopup(employee) {
   const assignPopup = document.querySelector(".assign-popup");
   assignPopup.innerHTML = "";
-  const popupContent = `<h2>Assign X Y</h2>
+  const popupContent = `<h2>Assign ${employee.employeeName} ${employee.employeeSurname}</h2>
         <div class="assignment-employee-info">
-            Current capacity: X/1.5
+            Current capacity: ${employee.capacity}/1.5
             <br>
-            Available: 1.5 - X
+            Available: ${1.5 - employee.capacity}
         </div>
         <select name="selectProject" id="select-project" class="select-project">
             <option value="projectid">project name</option>
