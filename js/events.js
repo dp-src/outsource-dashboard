@@ -1,0 +1,167 @@
+import { getMonthlyData, saveMonthlyData } from "./storage.js";
+import { renderProjects, renderEmployees, showAssignPopup } from "./render.js";
+
+export function initTabs() {
+  const navTabs = document.querySelector(".sidebar-nav");
+  const tabs = document.querySelectorAll(".nav-item");
+  const contents = document.querySelectorAll(".contents");
+
+  if (!navTabs) return;
+
+  navTabs.addEventListener("click", (event) => {
+    const clickedTab = event.target.closest(".nav-item");
+    if (!clickedTab) return;
+
+    const targetId = clickedTab.dataset.tab;
+
+    contents.forEach((content) => content.classList.add("hidden"));
+    tabs.forEach((tab) => tab.classList.remove("active"));
+
+    const activeContent = document.querySelector(`#${targetId}-content`);
+    if (activeContent) activeContent.classList.remove("hidden");
+    clickedTab.classList.add("active");
+  });
+}
+
+export function initSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  const sidebarCloseButton = document.querySelector(".sidebar-close-button");
+  const sidebarOpenButton = document.querySelector(".sidebar-open-button");
+
+  if (!sidebar) return;
+
+  document.addEventListener("click", (event) => {
+    const closeTarget = event.target.closest(".sidebar-close-button");
+    const openTarget = event.target.closest(".sidebar-open-button");
+
+    if (closeTarget) {
+      sidebar.classList.add("collapsed");
+      sidebarOpenButton.classList.remove("hidden");
+    }
+
+    if (openTarget) {
+      sidebar.classList.remove("collapsed");
+      sidebarOpenButton.classList.add("hidden");
+    }
+  });
+}
+
+//delete
+
+export function deleteItems(type, id) {
+  const monthlyData = getMonthlyData();
+  const items = monthlyData[type];
+
+  const itemToDelete = items.find((item) => item.id === id);
+  if (!itemToDelete) return;
+
+  const name =
+    itemToDelete.projectName ||
+    `${itemToDelete.employeeName} ${itemToDelete.employeeSurname}`;
+  if (confirm(`Are you sure you want to delete ${name}?`)) {
+    monthlyData[type] = items.filter((item) => item.id !== id);
+
+    saveMonthlyData(monthlyData);
+
+    if (type === "projects") renderProjects();
+    if (type === "employees") renderEmployees();
+  }
+}
+
+export function initTableEvents() {
+  const assignPopup = document.querySelector(".assign-popup");
+
+  document.addEventListener("click", (event) => {
+    // delete
+    if (event.target.classList.contains("delete-button")) {
+      const id = Number(event.target.dataset.id);
+      const type = event.target.dataset.type;
+
+      deleteItems(type, id);
+      return;
+    }
+
+    // assign open
+
+    const monthlyData = getMonthlyData();
+
+    if (event.target.classList.contains("assign-button")) {
+      const id = Number(event.target.dataset.id);
+
+      const employeeToAssign = monthlyData.employees.find(
+        (employee) => employee.id === id,
+      );
+      if (employeeToAssign) {
+        event.stopPropagation();
+        assignPopup.classList.remove("hidden");
+        showAssignPopup(employeeToAssign);
+      }
+      return;
+    }
+    // assign close
+    const assignCancel = document.querySelector("#assign-modal-cancel");
+
+    if (event.target === assignCancel || !assignPopup.contains(event.target)) {
+      assignPopup.innerHTML = "";
+      assignPopup.classList.add("hidden");
+    }
+
+    //assign submit
+    if (event.target.contains("#assign-modal-add")) {
+      const employeeId = Number(event.target.dataset.id);
+      const projectId = Number(event.target.dataset.projectId);
+
+      const employee = monthlyData.employees.find((e) => e.id === employeeId);
+      const project = monthlyData.projects.find((p) => p.id === projectId);
+
+      if (employee && project) {
+      }
+    }
+
+    submitBtn.addEventListener("click", (event) => {});
+  });
+}
+
+// popup
+
+export function popupListeners() {
+  const capacityRange = document.getElementById("capacity-allocation-value");
+  const capacityLabel = document.getElementById("capacity-allocation");
+  const fitRange = document.getElementById("project-fit-value");
+  const fitLabel = document.getElementById("project-fit");
+  const effectiveCapacityLabel = document.getElementById("effective-capacity");
+
+  const maxProjectCap = document.getElementById("max-project-capacity");
+  const currentProjectCap = document.getElementById("current-project-capacity");
+  const afterAssignmentLabel = document.getElementById(
+    "capacity-after-assignment",
+  );
+
+  if (!fitRange || !capacityRange) return;
+
+  const updateEffectiveCapacity = () => {
+    const cap = Number(capacityRange.value);
+    const fit = Number(fitRange.value);
+    const effectiveCapacity = cap * fit;
+
+    if (capacityLabel) capacityLabel.textContent = cap;
+    if (fitLabel) fitLabel.textContent = fit;
+    if (effectiveCapacityLabel)
+      effectiveCapacityLabel.textContent = effectiveCapacity.toFixed(2);
+    if (maxProjectCap && afterAssignmentLabel) {
+      const max = Number(maxProjectCap.textContent) || 0;
+      const current = Number(currentProjectCap.textContent) || 0;
+
+      const afterValue = current + effectiveCapacity;
+      afterAssignmentLabel.textContent = afterValue.toFixed(2);
+    }
+  };
+
+  fitRange.addEventListener("input", updateEffectiveCapacity);
+  capacityRange.addEventListener("input", updateEffectiveCapacity);
+
+  updateEffectiveCapacity();
+}
+
+//projectCapacity = 0;
+//projectCapacity += effectiveCapacity;

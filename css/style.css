@@ -1,0 +1,423 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-light: #4d4f6d;
+    --primary-dark: #3f4263;
+    --accent-color: #ffd344;
+    --accent-hover-color: #ffc400;
+    --unactive-color: #a9a9a9;
+    --light-text-color: #ffffff;
+    --dark-text-color: #000000;
+    --danger-color: #df5b4d;
+    --danger-hover-color: #e14332;
+    --success-color: #46966a;
+    --success-hover-color: #248f54;
+    --accent-background-color: rgb(245, 245, 245);
+}
+
+* {
+    font: 14px arial, sans-serif;
+}
+
+main {
+    display: flex;
+}
+
+h1, h2 {
+    font-size: 25px;
+}
+
+body {
+    overflow: hidden;
+}
+body .hidden {
+    display: none;
+}
+
+.sidebar {
+    background-color: var(--primary-light);
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 200px;
+    gap: 20px;
+    height: 100vh;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-close-button {
+    font-size: 25px;
+    height: 50px;
+    background-color: var(--primary-dark);
+    border-color: transparent;
+    color: var(--unactive-color);
+    cursor: pointer;
+}
+
+.period-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 8%;
+}
+
+.period-section h3 {
+    margin: 0.5em;
+    font: var(--headers);
+}
+
+.month-select, .year-select {
+    border-radius: 10px;
+    padding: 0 1em;
+    height: 2.5em;
+    width: 100%;
+    cursor: pointer;
+    background-color: #3f4263;
+    border: 0px;
+    color: var(--light-text-color);
+}
+
+.sidebar-divider {
+    height: 1px;
+    margin: 10px 0px;
+    background-color: var(--unactive-color);
+    opacity: 20%;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.nav-item {
+    text-decoration: none;
+    color: var(--unactive-color);
+    padding: 1em 1.5em;
+    width: 100%;
+
+}
+
+.nav-item:hover {
+    background-color: var(--primary-dark);
+    color: var(--light-text-color);
+}
+
+.nav-item.active {
+    background-color: var(--primary-dark);
+    border-left: 3px solid var(--accent-color);
+    color: var(--light-text-color);
+}
+
+/* main content */
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 3em 2em;
+}
+
+/* projects*/
+.contents {
+    display: flex;
+    flex: 1;
+    background-color: #ffffff;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 1em 0;
+}
+
+button {
+    background-color: var(--primary-light);
+    color: var(--light-text-color);
+    border-radius: 5px;
+    padding: 0.3em 1em;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    color: var(--accent-color);
+}
+
+#add-project {
+    margin-left: auto;
+}
+
+table {
+    box-shadow: rgba(0, 0, 0, 0.078) 0px 0px 30px;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--primary-light);
+    color: var(--light-text-color);
+}
+
+th {
+    padding: 1em 5px;
+}
+
+.sorting-icon {
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.search-icon {
+    cursor: pointer;
+    font-size: 1.4em;
+}
+
+.sorting-icon:hover, .search-icon:hover {
+    color: var(--accent-color);
+}
+
+tr {
+    border: 1px solid rgb(217, 217, 217);
+}
+
+td {
+    text-align: center;
+    padding: 1em 5px;
+
+}
+
+.delete-button, .cancel-button {
+    background-color: var(--danger-color);
+}
+
+.delete-button:hover, .cancel-button:hover {
+    background-color: var(--danger-hover-color);
+    color: var(--light-text-color);
+}
+
+.show-button, .assign-button {
+    background-color: var(--accent-color);
+    color: var(--dark-text-color);
+}
+
+.show-button:hover, .assign-button:hover {
+    background-color: var(--accent-hover-color);
+    color: var(--dark-text-color);
+}
+
+.availability-button:hover {
+    color: var(--light-text-color);
+}
+
+.add-button:not(:disabled) {
+    background-color: var(--success-color);
+}
+
+.add-button:not(:disabled):hover {
+    color: var(--light-text-color);
+    background-color: var(--success-hover-color);
+}
+
+button:disabled {
+    background-color: var(--unactive-color);
+    cursor: default;
+    color: var(--light-text-color);
+}
+
+.total {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.total-note {
+    font-size: 1em;
+    font-weight: 400;
+    color: #000000;
+    opacity: 50%;
+}
+
+.negative-income {
+    color: var(--danger-color)
+}
+
+/* Employees */
+
+
+/* toggle*/
+
+.hidden {
+    display: none;
+}
+
+/* add new project modal*/
+
+.add-modal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 2em;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.159) 0px 0px 50px;
+    padding: 2em;
+    transition: transform 0.3s ease;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
+    height: 2em;
+    padding: 0 0.5em;
+}
+
+.field-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 3em;
+}
+
+.buttons-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.buttons-section button {
+    padding: 0.8em 1.5em;
+}
+
+
+/* errors */
+
+.error-message {
+    color: var(--danger-color);
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    font-size: 0.8em;
+}
+
+input:invalid:not(:placeholder-shown),
+select:user-invalid {
+    outline: none;
+    border: 2px solid var(--danger-color);
+    border-radius: 3px;
+}
+
+input:invalid:not(:placeholder-shown) + .error-message {
+    display: block;
+}
+
+select:user-invalid + .error-message {
+    display: block;
+}
+
+input:invalid:not(:placeholder-shown) +.error-message {
+    display: block;
+}
+
+select:user-invalid {
+    outline: none;
+    border: 1px solid var(--danger-color);
+    border-radius: 3px;
+}
+
+/* hide */
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    position: absolute;
+}
+
+.add-modal.collapsed {
+    transform: translateX(+100%);
+    position: absolute;
+}
+
+.sidebar-open-button {
+    position: absolute;
+    margin: 0.5em;
+    height: 2em;
+    width: 3em;
+    background-color: var(--primary-light);
+    opacity: 50%;
+}
+
+.sidebar-open-button:hover {
+    opacity: 100%;
+}
+
+/* assignment popup */
+
+.assign-popup {
+    background-color: white;
+    width: 400px;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.159) 0px 0px 50px;
+    padding: 2em;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    gap: 1em;
+}
+
+.assignment-employee-info {
+    background-color: #fffcf3;
+    padding: 1em;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-hover-color);
+    line-height: 1.5em;
+}
+
+.assign-popup select {
+    height: 2.5em;
+    border-radius: 10px;
+}
+
+.assignment-settings input {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.assignment-project-info {
+    background-color: var(--accent-background-color);
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    line-height: 1.5em;
+}

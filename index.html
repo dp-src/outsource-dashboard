@@ -3,9 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/icon.svg">
+    <script type="module" src="./js/main.js"></script>
+    <title>Dashboard</title>
 </head>
 <body>
-    
+    <main>
+        <button class="sidebar-open-button hidden">≡</button>
+        <aside class="sidebar">
+            <button class="sidebar-close-button">≡</button>
+            <div class="period-section">
+                <h3>Period</h3>
+                <select class="year-select">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026" selected>2026</option>
+                </select>
+                <select class="month-select">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4" selected>May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
+            <div class="sidebar-divider"></div>
+            <nav class="sidebar-nav">
+                <a href="#" data-tab="projects" class="nav-item active">Projects</a>
+                <a href="#" data-tab="employees" class="nav-item">Employees</a>
+            </nav>
+        </aside>
+
+        <div class="content-wrapper">
+            <div id="projects-content" class="contents">
+                <div class="header">
+                    <h1>Projects</h1>
+                    <button id="add-project">+ Add Project</button>
+                    <button id="seed-data">Seed Data</button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Company name<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Project name<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Budget<span class="sorting-icon">⥯</span></th>
+                            <th>Employee Capacity<span class="sorting-icon">⥯</span></th>
+                            <th>Employees</th>
+                            <th>Estimated income<span class="sorting-icon">⥯</span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-table-body">
+                    </tbody>
+                </table>
+                <div class="total">Total Estimated Income: <span class="total negative-income">$X</span> <span class="total-note">(Bench payments: $Y)</span></div>
+            </div>
+
+            <div id="employees-content" class="contents hidden">
+                <div class="header">
+                    <h1>Employees</h1>
+                    <button id="add-employee">+ Add Employee</button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Surname<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Age<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Position<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Salary<span class="sorting-icon">⥯</span></th>
+                            <th>Estimated payment<span class="sorting-icon">⥯</span></th>
+                            <th>Project<span class="sorting-icon">⥯</span><span class="search-icon">⌕</span></th>
+                            <th>Project income<span class="sorting-icon">⥯</span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employees-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <div id='add-new-employee' class="add-modal collapsed">
+        <h2>Add New Employee</h2>
+        <form id="employee-add-form" class="add-form">
+            <div class="field-container">
+                <label for="employee-name">Name: *</label>
+                <input id='employee-name' type="text"  name="employeeName" minlength="3" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-name-error" required placeholder=" ">
+                <span class="error-message" id="employee-name-error">Name must be at least 3 characters and contain only letters</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-surname">Surname: *</label>
+                <input id='employee-surname' type="text"  name="employeeSurname" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" aria-describedby="employee-surname-error" required placeholder=" ">
+                <span class="error-message" id="employee-surname-error">Surname must be at least 3 characters and contain only letters</span>
+            </div>
+            <div class="field-container">
+                <label for="birth-date">Date of Birth: *</label>
+                <input id='birth-date' type="date"  name="birthDate" max="2026-01-01" aria-describedby="birth-date-error" required placeholder=" ">
+                <span class="error-message" id="birth-date-error">You must be at least 18 years old</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-position">Position: *</label>
+                <select id='employee-position' name="employeePosition" aria-describedby="employee-position-error" required>
+                    <option value="" disabled selected hidden>Select position</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Middle">Middle</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Architect">Architect</option>
+                    <option value="BO">BO</option>
+                </select>
+                <span class="error-message" id="employee-position-error">Please select a position</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-salary">Salary: *</label>
+                <input id='employee-salary' type="number"  name="employeeSalary" min="1" aria-describedby="employee-salary-error" required placeholder="">
+                <span class="error-message" id="employee-salary-error">Salary must be greater than 0</span>
+            </div>
+            <div class="buttons-section">
+                <button type="submit" id="employee-modal-add" class="add-button" disabled>Add</button>
+                <button type="button" id="employee-modal-cancel" class='cancel-button'>Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id='add-new-project' class="add-modal collapsed">
+        <h2>Add New Project</h2>
+        <form id="project-add-form" class="add-form">
+            <div class="field-container">
+                <label for="project-name">Project Name: *</label>
+                <input id='project-name' type="text"  name="projectName" minlength="3" aria-describedby="project-name-error" required placeholder="">
+                <span class="error-message" id="project-name-error">Project name must be at least 3 characters</span>
+            </div>
+            <div class="field-container">
+                <label for="company-name">Company Name: *</label>
+                <input id='company-name' type="text"  name="companyName" minlength="2" aria-describedby="company-name-error" required placeholder="">
+                <span class="error-message" id="company-name-error">Company name must be at least 2 characters</span>
+            </div>
+            <div class="field-container">
+                <label for="project-budget">Budget: *</label>
+                <input id='project-budget' type="number"  name="projectBudget" min="1" aria-describedby="project-budget-error" required placeholder="">
+                <span class="error-message" id="project-budget-error">Budget must be greater than 0</span>
+            </div>
+            <div class="field-container">
+                <label for="employee-capacity">Employee Capacity: *</label>
+                <input id='employee-capacity' type="number"  name="employeeCapacity" min="1" aria-describedby="employee-capacity-error" required placeholder="">
+                <span class="error-message" id="employee-capacity-error">Employee capacity must be at least 1</span>
+            </div>
+            <div class="buttons-section">
+                <button type="submit" id="project-modal-add" class="add-button" disabled>Add</button>
+                <button type="button" id="project-modal-cancel" class='cancel-button'>Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="assign-popup" class="assign-popup hidden">
+    </div>
 </body>
 </html>
