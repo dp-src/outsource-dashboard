@@ -82,9 +82,11 @@ export function initTableEvents() {
     }
 
     // assign open
+
+    const monthlyData = getMonthlyData();
+
     if (event.target.classList.contains("assign-button")) {
       const id = Number(event.target.dataset.id);
-      const monthlyData = getMonthlyData();
 
       const employeeToAssign = monthlyData.employees.find(
         (employee) => employee.id === id,
@@ -103,6 +105,20 @@ export function initTableEvents() {
       assignPopup.innerHTML = "";
       assignPopup.classList.add("hidden");
     }
+
+    //assign submit
+    if (event.target.contains("#assign-modal-add")) {
+      const employeeId = Number(event.target.dataset.id);
+      const projectId = Number(event.target.dataset.projectId);
+
+      const employee = monthlyData.employees.find((e) => e.id === employeeId);
+      const project = monthlyData.projects.find((p) => p.id === projectId);
+
+      if (employee && project) {
+      }
+    }
+
+    submitBtn.addEventListener("click", (event) => {});
   });
 }
 

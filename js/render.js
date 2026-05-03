@@ -90,7 +90,11 @@ export function showAssignPopup(employee) {
   assignPopup.insertAdjacentHTML("beforeend", popupContent);
 
   const selectElement = document.querySelector("#select-project");
+
   selectElement.addEventListener("change", () => {
+    const assignBtn = document.getElementById("assign-modal-add");
+    assignBtn.dataset.projectId = selectElement.value;
+
     if (selectElement.value !== "") {
       const projectId = Number(selectElement.value);
 

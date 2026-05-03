@@ -66,6 +66,7 @@ projectForm.addEventListener("submit", (event) => {
   const projectData = Object.fromEntries(formData.entries());
   projectData.id = Date.now();
   projectData.capacity = 0;
+  projectData.currentCapacity = 0;
 
   // recieve saved data or empty array
   const monthlyData = getMonthlyData();
