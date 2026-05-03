@@ -32,5 +32,5 @@ Double-click index.html
 # Option 2 — serve locally (recommended to avoid ES module CORS restrictions)
 
 Then navigate to `http://localhost:<port>` in your browser.
-
+```
 ## Implementation Notes
